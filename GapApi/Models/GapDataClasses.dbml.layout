@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="GapDataClasses">
+  <DataContextMoniker Name="/GapDataClassesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="817c0787-4b7a-4919-a0b7-9957f0d7c105" absoluteBounds="3.5, 0.875, 2, 1.7708968098958329">
+      <DataClassMoniker Name="/GapDataClassesDataContext/Cita" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b091147e-5bc3-406b-8cac-9eeae2afdca9" absoluteBounds="3.515, 1.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6acbc4fc-5b40-42f8-a7da-470c44efc355" absoluteBounds="0.75, 1, 2, 1.5785953776041664">
+      <DataClassMoniker Name="/GapDataClassesDataContext/Paciente" />
+      <nestedChildShapes>
+        <elementListCompartment Id="65152a67-b4a4-4280-aa55-92414251ed42" absoluteBounds="0.765, 1.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6e551809-c381-48f0-a970-9abc2bec5213" absoluteBounds="0.75, 4.25, 2, 1.1939925130208327">
+      <DataClassMoniker Name="/GapDataClassesDataContext/TipoCita" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2b678593-7530-4340-b475-ddc6f50575b8" absoluteBounds="0.765, 4.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
