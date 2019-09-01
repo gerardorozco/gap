@@ -20,9 +20,27 @@ namespace GapApi.Controllers
         }
 
         // GET: api/Cita/5
-        public string Get(int id)
+        public IEnumerable<CitaModel> Get(string id)
         {
-            return "value";
+            var citas = from x in context.Cita.Where(c => c.IdPaciente == id)
+                        join y in context.Paciente on x.IdPaciente equals y.IdPaciente
+                        join z in context.TipoCita on x.TipoCita equals z.IdTipoCita
+                        select new CitaModel() { IdCita = x.IdCita, TipoCita = z.TipoCita1, Paciente = y.NombrePaciente, Hora = x.Hora, Fecha = x.Fecha};
+
+            List<CitaModel> citaList = new List<CitaModel>();
+
+            foreach (var item in citas)
+            {
+                CitaModel citamodel = new CitaModel();
+                citamodel.IdCita = item.IdCita;
+                citamodel.TipoCita = item.TipoCita;
+                citamodel.Paciente = item.Paciente;
+                citamodel.Hora = item.Hora;
+                citamodel.Fecha = item.Fecha;
+                citaList.Add(citamodel);
+            }
+
+            return citaList;
         }
 
         // POST: api/Cita
