@@ -41,7 +41,9 @@
             @Html.DisplayFor(modelItem => item.Direccion)
         </td>
         <td>
-            @Html.ActionLink("Asignar Cita", "Edit", new {  id=item.IdPaciente})     
+            @Html.ActionLink("Asignar Cita", "Edit", new {  id=item.IdPaciente}) |  
+            @Html.ActionLink("Ver Citas", "Details", new { id = item.IdPaciente })
+              
         </td>
     </tr>
 }

@@ -25,10 +25,10 @@ namespace GapWeb.Controllers
             return View(paciente);
         }
 
-        // GET: Paciente/Details/5
-        public ActionResult Details(int id)
+        // GET: Paciente/Details/5      
+        public ActionResult Details(string id)
         {
-            return View();
+            return RedirectToAction("Index", "Citas", new { @id = id });
         }
 
         // GET: Paciente/Create

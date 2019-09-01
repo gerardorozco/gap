@@ -13,16 +13,33 @@ namespace GapWeb.Controllers
 {
     public class CitasController : Controller
     {
-        // GET: Citas
-        public ActionResult Index(string id)
+        // GET: Paciente/Details/5      
+        public ActionResult Return()
         {
-            return View(new Cita());
+            return RedirectToAction("Index", "Paciente");
+        }
+
+        // GET: Citas
+        public async Task<ActionResult> Index(string id)
+        {
+
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:52052");
+
+            string response = await client.GetStringAsync("/api/Cita/" + id);
+            var serializer = new JavaScriptSerializer();
+            IEnumerable<CitaModel> tipoCitas =
+            serializer.Deserialize<IEnumerable<CitaModel>>(response);
+            ViewBag.Paciente = id;
+
+            return View(tipoCitas);
+
         }
 
         // GET: Citas/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            return RedirectToAction("Index", "Citas", new { @id = id });
         }
 
         // GET: Citas/Create
@@ -101,10 +118,10 @@ namespace GapWeb.Controllers
                     tipos.Add(new SelectListItem { Text = item.TipoCita1, Value = item.IdTipoCita.ToString() });
                 }
                 ViewBag.ddlTipoCitas = tipos;
-              
+
                 return View(cita);
             }
-            
+
         }
 
         // GET: Citas/Edit/5
@@ -130,25 +147,29 @@ namespace GapWeb.Controllers
         }
 
         // GET: Citas/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            try
+            {
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://localhost:52052");
+                HttpResponseMessage response =
+                await client.DeleteAsync("/api/Cita/" + id);
+                response.EnsureSuccessStatusCode();
+
+                return RedirectToAction("Index", new { id = id });
+            }
+            catch
+            {
+                return RedirectToAction("Index", new { id = id });
+            }
         }
 
         // POST: Citas/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
     }
 }

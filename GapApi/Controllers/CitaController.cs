@@ -68,10 +68,27 @@ namespace GapApi.Controllers
         }
 
         // DELETE: api/Cita/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
             var cita = from c in context.Cita where c.IdCita == id select c;
+            string result = String.Empty;
 
+            foreach (var detail in cita)
+            {
+                context.Cita.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                context.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                string message = e.Message;
+                return Request.CreateResponse(HttpStatusCode.ExpectationFailed);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
     }
 }
