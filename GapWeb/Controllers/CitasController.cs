@@ -147,7 +147,7 @@ namespace GapWeb.Controllers
         }
 
         // GET: Citas/Delete/5
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int id, string paciente)
         {
             try
             {
@@ -157,11 +157,11 @@ namespace GapWeb.Controllers
                 await client.DeleteAsync("/api/Cita/" + id);
                 response.EnsureSuccessStatusCode();
 
-                return RedirectToAction("Index", new { id = id });
+                return RedirectToAction("Index", new { id = paciente });
             }
             catch
             {
-                return RedirectToAction("Index", new { id = id });
+                return RedirectToAction("Index", new { id = paciente });
             }
         }
 
