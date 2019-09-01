@@ -98,7 +98,7 @@ $tf/
 _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
-
+m
 # JustCode is a .NET coding add-in
 .JustCode
 
@@ -200,7 +200,6 @@ UpgradeLog*.XML
 UpgradeLog*.htm
 
 # SQL Server files
-*.mdf
 *.ldf
 
 # Business Intelligence projects
