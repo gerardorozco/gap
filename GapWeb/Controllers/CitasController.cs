@@ -20,7 +20,7 @@ namespace GapWeb.Controllers
         }
 
         // GET: Citas
-        public async Task<ActionResult> Index(string id)
+        public async Task<ActionResult> Index(string id, bool hasError)
         {
 
             var client = new HttpClient();
@@ -31,6 +31,11 @@ namespace GapWeb.Controllers
             IEnumerable<CitaModel> tipoCitas =
             serializer.Deserialize<IEnumerable<CitaModel>>(response);
             ViewBag.Paciente = id;
+
+            if (hasError)
+            {
+                ViewBag.ErrorMessage = "La cita está programada en menos de 24 horas, no se puede cancelar !";
+            }
 
             return View(tipoCitas);
 
@@ -155,13 +160,13 @@ namespace GapWeb.Controllers
                 client.BaseAddress = new Uri("http://localhost:52052");
                 HttpResponseMessage response =
                 await client.DeleteAsync("/api/Cita/" + id);
-                response.EnsureSuccessStatusCode();
+                response.EnsureSuccessStatusCode();              
 
-                return RedirectToAction("Index", new { id = paciente });
+                return RedirectToAction("Index", new { id = paciente, hasError = false });
             }
             catch
             {
-                return RedirectToAction("Index", new { id = paciente });
+                return RedirectToAction("Index", new { id = paciente, hasError = true });
             }
         }
 

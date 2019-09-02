@@ -73,6 +73,16 @@ namespace GapApi.Controllers
             var cita = from c in context.Cita where c.IdCita == id select c;
             string result = String.Empty;
 
+            DateTime fechaCita = cita.FirstOrDefault().Fecha + cita.FirstOrDefault().Hora;
+            DateTime hoy = DateTime.Now;
+
+            var hours = (fechaCita - hoy).TotalHours;
+
+            if (hours < 24)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotAcceptable);
+            }
+
             foreach (var detail in cita)
             {
                 context.Cita.DeleteOnSubmit(detail);

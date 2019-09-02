@@ -28,7 +28,7 @@ namespace GapWeb.Controllers
         // GET: Paciente/Details/5      
         public ActionResult Details(string id)
         {
-            return RedirectToAction("Index", "Citas", new { @id = id });
+            return RedirectToAction("Index", "Citas", new { @id = id, @hasError = false });
         }
 
         // GET: Paciente/Create
